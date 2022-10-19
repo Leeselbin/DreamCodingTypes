@@ -13,7 +13,7 @@
 
   // TypeScript
   enum Days {
-    Monday = 1,
+    Monda,
     Tuesday,
     Wednesday,
     Thursday,
@@ -21,5 +21,16 @@
     Satarday,
     Sunday,
   }
-  const day = Days.Satarday;
+  console.log(Days.Satarday);
+
+  let day: Days = Days.Satarday;
+  day = Days.Tuesday;
+  day = 10;
+  console.log(day);
+
+  // 이렇게 유니온 타입으로 대채한다.
+  type DaysOfWeek = "Monday" | "TuesDay" | "WednesDay";
+
+  let dayOfWeek: DaysOfWeek = "Monday";
+  dayOfWeek = "WednesDay";
 }
