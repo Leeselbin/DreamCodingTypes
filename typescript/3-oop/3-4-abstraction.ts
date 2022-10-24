@@ -26,41 +26,32 @@
       this.coffeBeans += beans;
     }
 
-    makeCoffee(shots: number): CoffeeCup {
+    grindBeans(shots: number) {
+      console.log(`grinding beans for ${shots}`);
       if (this.coffeBeans < shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT) {
         throw new Error("Not enough coffee beans!");
       }
       this.coffeBeans -= shots * CoffeeMaker.BEANS_GRAMM_PER_SHOT;
+    }
+
+    preheat(): void {
+      console.log("heating up...");
+    }
+
+    extract(shots: number): CoffeeCup {
+      console.log(`Pulling ${shots} shots...`);
       return {
         shots,
         hasMilk: false,
       };
     }
+    makeCoffee(shots: number): CoffeeCup {
+      this.grindBeans(shots);
+      this.preheat();
+      return this.extract(shots);
+    }
   }
 
   const maker = CoffeeMaker.makeMachine(32);
   maker.fillCoffeeBeans(32);
-
-  class User {
-    get fullName(): string {
-      return `${this.firstName} ${this.lastName}`;
-    }
-    private internalAge = 4;
-    get age(): number {
-      return this.internalAge;
-    }
-    set age(num: number) {
-      if (num < 0) {
-        new Error("error");
-      }
-      this.internalAge = num;
-    }
-    constructor(private firstName: string, private lastName: string) {}
-  }
-
-  const user = new User("Steve", "jobs");
-  user.age = 6;
-
-  console.log(user);
-  console.log(user);
 }
